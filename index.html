@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    
     <meta charset="UTF-8">
-    <title>VuvEnDod</title>
+    <title>VuvEnDod | Title</title>
+    <!-- css -->
     <style>
-        /* css */
+        /* сброс отступов */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .wrapper {
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+            border: 3px solid black;
+            display: flex;
+            flex-direction:column;
+            background: white;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+            background-color: #e0e0e0;
+        }
+        .col-left, .col-right {
+            flex: 1;
+            padding: 20px;
+            background: transparent;
+        }
+        .col-center {
+            flex: 2;
+            padding: 20px;
+            background-color: white;
+            border-left: 3px solid black;
+            border-right: 3px solid black;
+        }
     </style>
 </head>
 <body>
-    <!-- текст, картинки, кнопки -->
-    <title>Jack Daniels</title>
+    <!-- html -->
+    <div class="wrapper">
+        <div class="header" style="padding: 15px; text-align: center; border-bottom: 3px solid black;">
+            <!-- buttons -->
+        </div>
+
+        <div class="main-content">
+            <div class="col-left">Background...</div>
+            <div class="col-center">Main Content...</div>
+            <div class="col-left">Background...</div>
+        </div>
+    </div>
 </body>
 </html>
