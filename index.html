@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Мой сайт</title>
+<title>Мой сайт - Скрапбук</title>
 <style>
   /* ===== ОБЩИЕ НАСТРОЙКИ ===== */
   * {
@@ -13,102 +13,153 @@
   }
 
   body {
-    /* Единый фон для всего сайта */
-    background: #1a1a2e;                    /* сплошной цвет */
-    /* Или градиент: */
-    /* background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); */
-    /* Или картинка: */
-    /* background: url('fon.jpg') center/cover fixed no-repeat; */
-
-    min-height: 100vh;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #eee;
-    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4; /* Единый фон всей страницы (можно поменять) */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px; /* Отступ от краев экрана */
+    gap: 10px;     /* Расстояние между шапкой и основным блоком */
   }
 
-  /* ===== ЦЕНТРАЛЬНАЯ ЛЕНТА ===== */
-  .feed {
-    max-width: 700px;              /* ширина ленты */
-    margin: 0 auto;                /* центрирование по горизонтали */
-    background: rgba(255, 255, 255, 0.05);  /* полупрозрачный фон ленты */
-    backdrop-filter: blur(10px);   /* эффект стекла (по желанию) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  /* ===== ВЕРХНЯЯ ПАНЕЛЬ (ШАПКА) ===== */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 4px solid #000;
+    background: #fff;
+    padding: 10px 20px;
+    height: 80px; /* Фиксированная высота шапки */
   }
 
-  .feed h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 28px;
-    color: #fff;
+  /* Контейнер для 4 кнопок */
+  .top-buttons {
+    display: flex;
+    gap: 15px;
   }
 
-  /* ===== ЭЛЕМЕНТЫ ЛЕНТЫ (посты) ===== */
-  .post {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+  /* Стили самих кнопок */
+  .top-buttons button {
+    border: 4px solid #000;
+    background: #fff;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .top-buttons button:hover {
+    background: #ddd;
+  }
+
+  /* Текст справа в шапке */
+  .top-text {
+    font-size: 14px;
+    text-align: right;
+    max-width: 250px;
+    line-height: 1.4;
+  }
+
+  /* ===== ОСНОВНАЯ СТРУКТУРА (3 КОЛОНКИ) ===== */
+  .main-layout {
+    display: grid;
+    /* 1fr 2fr 1fr — центральная колонка в 2 раза шире боковых */
+    grid-template-columns: 1fr 2fr 1fr; 
+    flex: 1; /* Занимает всё оставшееся место до низа */
+    border: 4px solid #000;
+    background: #fff;
+  }
+
+  /* Общие стили для всех трех колонок */
+  .main-layout > div {
     padding: 20px;
-    margin-bottom: 16px;
-    transition: transform 0.2s, background 0.2s;
-    border-left: 4px solid #4e9eff;    /* акцентная полоска */
   }
 
-  .post:hover {
-    transform: translateX(5px);
-    background: rgba(255, 255, 255, 0.12);
+  /* Левая колонка (Бекграунд) */
+  .left-sidebar {
+    border-right: 4px solid #000;
+    background: #e8e8e8; /* Здесь можно поставить картинку или цвет */
   }
 
-  .post h2 {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #4e9eff;
+  /* Центральная колонка (Лента) */
+  .feed {
+    text-align: center;
+    background: #fff; /* Фон ленты */
+    overflow-y: auto; /* Если контента много — появится скролл */
   }
 
-  .post p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #ccc;
+  /* Правая колонка (Бекграунд) */
+  .right-sidebar {
+    border-left: 4px solid #000;
+    background: #e8e8e8; /* Здесь можно поставить картинку или цвет */
   }
 
-  .post .date {
-    font-size: 12px;
-    color: #888;
-    margin-top: 10px;
-  }
-
-  /* ===== АДАПТИВ (телефоны) ===== */
-  @media (max-width: 600px) {
-    body { padding: 20px 10px; }
-    .feed { padding: 20px; border-radius: 12px; }
-    .feed h1 { font-size: 22px; }
+  /* ===== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ===== */
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      height: auto;
+      gap: 15px;
+      padding: 15px;
+    }
+    .top-text {
+      text-align: center;
+      max-width: 100%;
+    }
+    .top-buttons {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    /* На телефонах колонки встают друг под друга */
+    .main-layout {
+      grid-template-columns: 1fr;
+    }
+    .left-sidebar, .right-sidebar {
+      border: none;
+      border-bottom: 4px solid #000;
+      min-height: 150px;
+    }
   }
 </style>
 </head>
 <body>
 
-  <div class="feed">
-    <h1>Моя лента</h1>
+  <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+  <header class="top-bar">
+    <div class="top-buttons">
+      <button>Кнопка 1</button>
+      <button>Кнопка 2</button>
+      <button>Кнопка 3</button>
+      <button>Кнопка 4</button>
+    </div>
+    <div class="top-text">
+      Кнопки по типу credit, info, gallery, music, vids
+    </div>
+  </header>
 
-    <div class="post">
-      <h2>Заголовок поста</h2>
-      <p>Здесь текст первого поста. Можно менять как угодно — добавлять картинки, ссылки, кнопки.</p>
-      <div class="date">12 июня 2024</div>
+  <!-- ОСНОВНОЙ БЛОК С 3 КОЛОНКАМИ -->
+  <main class="main-layout">
+    
+    <!-- Левая колонка -->
+    <div class="left-sidebar">
+      1. Бекграунд
     </div>
 
-    <div class="post">
-      <h2>Второй пост</h2>
-      <p>Просто копируй блок <code>&lt;div class="post"&gt;</code>, чтобы добавить новый элемент ленты.</p>
-      <div class="date">10 июня 2024</div>
+    <!-- Центральная лента -->
+    <div class="feed">
+      <h2>Главная лента скрапбука</h2>
+      <p>Здесь будет ваш контент...</p>
+      <!-- Сюда можно добавлять посты, картинки и т.д. -->
     </div>
 
-    <div class="post">
-      <h2>Третий пост</h2>
-      <p>Всё центрируется автоматически и подстраивается под мобильные устройства.</p>
-      <div class="date">8 июня 2024</div>
+    <!-- Правая колонка -->
+    <div class="right-sidebar">
+      1. Бекграунд
     </div>
-  </div>
+
+  </main>
 
 </body>
 </html>
